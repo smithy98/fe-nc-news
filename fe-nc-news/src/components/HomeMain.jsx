@@ -9,8 +9,8 @@ const HomeMain = () => {
         id="home_image"
       ></img>
       <p>
-        Welcome to NC news the most biased, non-license and funded by a hostile
-        government. Not really. Well Maybe
+        Welcome to NC news. Proudly the most biased, non-licensed news
+        corporation; funded by a hostile government. Not really. Well Maybe
       </p>
     </main>
   );

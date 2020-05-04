@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loading from "./Loading";
+import ArticleCard from "./ArticleCard";
 
 class ArticlesMain extends Component {
   state = {
@@ -19,17 +20,6 @@ class ArticlesMain extends Component {
       this.fetchArticles();
     }
   }
-
-  fetchArticles = () => {
-    api.getArticles(this.state).then((articles) => {
-      this.setState({ articles, isLoading: false });
-    });
-  };
-
-  handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ topic: value });
-  };
 
   render() {
     const { articles, topic, isLoading } = this.state;
@@ -53,19 +43,23 @@ class ArticlesMain extends Component {
             </select>
           </label>
         </form>
-        {articles.map(({ article_id, title, author, topic, created_at }) => {
-          return (
-            <div className="list_item" key={article_id}>
-              Title: {title} <br />
-              Author: {author} <br />
-              Topic: {topic} <br />
-              Posted: {created_at}
-            </div>
-          );
+        {articles.map((article) => {
+          const { article_id } = article;
+          return <ArticleCard article={article} key={article_id} />;
         })}
       </main>
     );
   }
+  fetchArticles = () => {
+    api.getArticles(this.state).then((articles) => {
+      this.setState({ articles, isLoading: false });
+    });
+  };
+
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ topic: value });
+  };
 }
 
 export default ArticlesMain;

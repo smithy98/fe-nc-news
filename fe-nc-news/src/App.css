@@ -3,7 +3,11 @@
 }
 
 #header {
+  display: grid;
+  grid-template-rows: auto auto auto;
   border: 2px solid black;
+  /* align-content: right;
+  justify-content: right; */
 }
 
 #navbar {
@@ -25,4 +29,15 @@
 .user_avatar {
   width: 60%;
   justify-content: right;
+}
+
+#user_checker {
+  width: 50px;
+  justify-self: right;
+}
+
+.article_body {
+  text-align: justify;
+  margin-right: 5%;
+  margin-left: 5%;
 }

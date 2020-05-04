@@ -27,3 +27,30 @@ export const getArticles = ({ topic }) => {
       return articles;
     });
 };
+
+export const getArticleById = (article_id) => {
+  return axios
+    .get(`https://nc-news-backend-dan.herokuapp.com/api/articles/${article_id}`)
+    .then(({ data: { article } }) => {
+      return article;
+    });
+};
+
+export const patchVotes = (subject, article_id, votes) => {
+  return axios.patch(
+    `https://nc-news-backend-dan.herokuapp.com/api/${subject}/${article_id}`,
+    {
+      inc_votes: votes,
+    }
+  );
+};
+
+export const getCommentsByArticleId = (article_id) => {
+  return axios
+    .get(
+      `https://nc-news-backend-dan.herokuapp.com/api/articles/${article_id}/comments`
+    )
+    .then(({ data: { comments } }) => {
+      return comments;
+    });
+};
