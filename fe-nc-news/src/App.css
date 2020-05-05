@@ -41,3 +41,9 @@
   margin-right: 5%;
   margin-left: 5%;
 }
+
+.comment_input {
+  width: 90%;
+  margin-right: 5px;
+  justify-self: right;
+}

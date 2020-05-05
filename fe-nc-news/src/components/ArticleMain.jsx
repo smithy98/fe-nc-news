@@ -7,6 +7,7 @@ class ArticlesMain extends Component {
   state = {
     articles: [],
     topic: undefined,
+    sortBy: undefined,
     isLoading: true,
   };
 
@@ -15,14 +16,17 @@ class ArticlesMain extends Component {
   }
 
   componentDidUpdate(prevprops, prevstate) {
-    if (prevstate.topic !== this.state.topic) {
+    if (
+      prevstate.topic !== this.state.topic ||
+      prevstate.sortBy !== this.state.sortBy
+    ) {
       console.log("updating");
       this.fetchArticles();
     }
   }
 
   render() {
-    const { articles, topic, isLoading } = this.state;
+    const { articles, topic, sortBy, isLoading } = this.state;
     if (isLoading) return <Loading />;
 
     return (
@@ -30,16 +34,28 @@ class ArticlesMain extends Component {
         <h2>Articles</h2>
         <form>
           <label>
-            Topics:
+            Filter by Topics:
             <select
               id="article_topic_dropbox"
               value={topic}
-              onChange={this.handleChange}
+              onChange={this.handleTopics}
             >
-              <option value={undefined}>All</option>
+              <option value="">All</option>
               <option value="coding">Coding</option>
               <option value="football">Football</option>
               <option value="cooking">Cooking</option>
+            </select>
+          </label>
+          <label>
+            Sort By:
+            <select
+              id="article_topic_dropbox"
+              value={sortBy}
+              onChange={this.handleSortBy}
+            >
+              <option value="">Date created</option>
+              <option value="comment_count">Comment Count</option>
+              <option value="votes">Votes</option>
             </select>
           </label>
         </form>
@@ -50,15 +66,27 @@ class ArticlesMain extends Component {
       </main>
     );
   }
+
   fetchArticles = () => {
     api.getArticles(this.state).then((articles) => {
       this.setState({ articles, isLoading: false });
     });
   };
 
-  handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ topic: value });
+  handleTopics = (event) => {
+    let topic = event.target.value;
+    if (topic.length === 0) {
+      topic = undefined;
+    }
+    this.setState({ topic: topic });
+  };
+
+  handleSortBy = (event) => {
+    let sortBy = event.target.value;
+    if (sortBy.length === 0) {
+      sortBy = undefined;
+    }
+    this.setState({ sortBy: sortBy });
   };
 }
 

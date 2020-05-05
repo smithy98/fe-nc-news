@@ -16,6 +16,7 @@ class ArticleIndividual extends Component {
 
   render() {
     const { article, isLoading } = this.state;
+    const { user } = this.props;
     if (isLoading) return <Loading />;
     return (
       <main>
@@ -31,7 +32,7 @@ class ArticleIndividual extends Component {
         <section className="comments_section">
           <p>Comments</p>
           <p>{article.comment_count} Comments</p>
-          <ArticleComments article_id={article.article_id} />
+          <ArticleComments article_id={article.article_id} user={user} />
         </section>
       </main>
     );

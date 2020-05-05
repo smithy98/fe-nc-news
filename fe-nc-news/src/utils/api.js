@@ -1,13 +1,5 @@
 import axios from "axios";
 
-export const getTopics = () => {
-  return axios
-    .get("https://nc-news-backend-dan.herokuapp.com/api/topics")
-    .then(({ data: { topics } }) => {
-      return topics;
-    });
-};
-
 export const getUsers = () => {
   return axios
     .get("https://nc-news-backend-dan.herokuapp.com/api/users")
@@ -16,11 +8,20 @@ export const getUsers = () => {
     });
 };
 
-export const getArticles = ({ topic }) => {
+export const getTopics = () => {
+  return axios
+    .get("https://nc-news-backend-dan.herokuapp.com/api/topics")
+    .then(({ data: { topics } }) => {
+      return topics;
+    });
+};
+
+export const getArticles = ({ topic, sortBy }) => {
   return axios
     .get("https://nc-news-backend-dan.herokuapp.com/api/articles", {
       params: {
         topic: topic,
+        sort_by: sortBy,
       },
     })
     .then(({ data: { articles } }) => {
@@ -53,4 +54,14 @@ export const getCommentsByArticleId = (article_id) => {
     .then(({ data: { comments } }) => {
       return comments;
     });
+};
+
+export const postCommentToArticleId = (article_id, username, body) => {
+  return axios.post(
+    `https://nc-news-backend-dan.herokuapp.com/api/articles/${article_id}/comments`,
+    {
+      username: username,
+      body: body,
+    }
+  );
 };
