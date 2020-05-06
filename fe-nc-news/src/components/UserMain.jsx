@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
 import * as api from "../utils/api";
 import Loading from "./Loading";
 import ErrorDisplayer from "./ErrorDisplayer";
@@ -37,17 +36,18 @@ class UsersMain extends Component {
         <h2>Users</h2>
         {users.map(({ username, avatar_url, name }) => {
           return (
-            <Link to={`/users/${username}`} key={username}>
-              <div className="list_item" key={username}>
-                Name: {name} <br />
-                Username: {username} <br />
-                <img
-                  src={avatar_url}
-                  alt="User Avatar"
-                  className="user_avatar"
-                ></img>
-              </div>
-            </Link>
+            <section className="list_item" key={username}>
+              Name: {name} <br />
+              Username: {username} <br />
+              <img
+                src={avatar_url}
+                alt="User Avatar"
+                className="user_avatar"
+              ></img>
+              <button onClick={() => this.props.updateUser(username)}>
+                Log In as {username}
+              </button>
+            </section>
           );
         })}
       </main>

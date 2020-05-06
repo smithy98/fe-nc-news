@@ -13,14 +13,14 @@ const ArticleCard = (props) => {
   } = props.article;
   return (
     <Link to={`${article_id}`}>
-      <div className="list_item">
-        Title: {title} <br />
-        Author: {author} <br />
-        Topic: {topic} <br />
-        Posted: {created_at} <br />
-        comment count: {comment_count} <br />
-        Votes: {votes}
-      </div>
+      <section className="list_item">
+        <p>Title: {title}</p>
+        <p>Author: {author}</p>
+        <p>Topic: {topic}</p>
+        <p>Posted: {created_at}</p>
+        <p>Comment Count: {comment_count}</p>
+        <p>Votes: {votes}</p>
+      </section>
     </Link>
   );
 };

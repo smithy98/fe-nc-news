@@ -16,12 +16,6 @@ class App extends React.Component {
     user: "tickle122",
   };
 
-  updateUser = (user) => {
-    this.setState({
-      user: user,
-    });
-  };
-
   render() {
     const { user } = this.state;
     return (
@@ -31,7 +25,7 @@ class App extends React.Component {
         <Router>
           <HomeMain path="/" />
           <TopicMain path="/topics" />
-          <UserMain path="/users" />
+          <UserMain path="/users" updateUser={this.updateUser} />
           <ArticleMain path="/articles" />
           <ArticleIndividual path="/articles/:article_id" user={user} />
           <ErrorDisplayer default />
@@ -40,6 +34,11 @@ class App extends React.Component {
       </div>
     );
   }
+  updateUser = (user) => {
+    this.setState({
+      user: user,
+    });
+  };
 }
 
 export default App;

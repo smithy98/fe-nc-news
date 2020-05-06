@@ -24,17 +24,17 @@ class TopicMain extends Component {
     if (isLoading) return <Loading />;
 
     return (
-      <div id="topic_main">
+      <section id="topic_main">
         <h2>Topics</h2>
         {topics.map(({ slug, description }) => {
           return (
-            <div className="list_item" key={slug}>
-              Topic: {slug} <br />
-              Description: {description}
-            </div>
+            <section className="list_item" key={slug}>
+              <p>Topic: {slug}</p>
+              <p>Description: {description}</p>
+            </section>
           );
         })}
-      </div>
+      </section>
     );
   }
 }
