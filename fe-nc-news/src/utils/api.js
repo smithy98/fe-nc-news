@@ -65,3 +65,9 @@ export const postCommentToArticleId = (article_id, username, body) => {
     }
   );
 };
+
+export const deleteCommentById = (comment_id) => {
+  return axios.delete(
+    `https://nc-news-backend-dan.herokuapp.com/api/comments/${comment_id}`
+  );
+};

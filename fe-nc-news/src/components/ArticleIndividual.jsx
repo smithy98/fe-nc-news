@@ -3,11 +3,13 @@ import Loading from "./Loading";
 import * as api from "../utils/api";
 import Votes from "./Votes";
 import ArticleComments from "./ArticleComments";
+import ErrorDisplayer from "./ErrorDisplayer";
 
 class ArticleIndividual extends Component {
   state = {
     article: {},
     isLoading: true,
+    err: "",
   };
 
   componentDidMount() {
@@ -15,9 +17,13 @@ class ArticleIndividual extends Component {
   }
 
   render() {
-    const { article, isLoading } = this.state;
+    const { article, isLoading, err } = this.state;
     const { user } = this.props;
+
+    console.log(err);
+
     if (isLoading) return <Loading />;
+    if (err) return <ErrorDisplayer err={err} />;
     return (
       <main>
         <h2>{article.title}</h2>
@@ -38,9 +44,18 @@ class ArticleIndividual extends Component {
     );
   }
   fetchArticleById = () => {
-    api.getArticleById(this.props.article_id).then((article) => {
-      this.setState({ article: article, isLoading: false });
-    });
+    api
+      .getArticleById(this.props.article_id)
+      .then((article) => {
+        this.setState({ article: article, isLoading: false });
+      })
+      .catch((err) => {
+        console.log("in error catch");
+        this.setState({
+          err: err.response.data.msg,
+          isLoading: false,
+        });
+      });
   };
 }
 

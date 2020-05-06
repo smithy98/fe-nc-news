@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import Votes from "./Votes";
 import Loading from "./Loading";
 import CommentAdder from "./CommentAdder";
+import CommentCard from "./CommentCard";
 
 class ArticleComments extends Component {
   state = {
     comments: [],
     isLoading: true,
     commentPosting: false,
+    deletingComment: false,
   };
 
   componentDidMount() {
@@ -18,28 +19,26 @@ class ArticleComments extends Component {
   componentDidUpdate(prevprops, prevstate) {
     if (prevstate.commentPosting !== this.state.commentPosting) {
       this.fetchCommentsByArticleId();
+    } else if (this.state.deletingComment) {
+      this.fetchCommentsByArticleId();
+      this.toggleDeletingComment();
     }
   }
 
   render() {
     const { comments, isLoading, commentPosting } = this.state;
     const { user, article_id } = this.props;
-    console.log("rendering comments");
     if (isLoading) return <Loading />;
     return (
       <section className="comment_section">
         {comments.map((comment) => {
           return (
-            <section className="comment_card" key={comment.comment_id}>
-              <p>
-                {comment.author}: {comment.body}
-              </p>
-              <Votes
-                votes={comment.votes}
-                subject="comments"
-                id={comment.comment_id}
-              />
-            </section>
+            <CommentCard
+              comment={comment}
+              user={user}
+              key={comment.comment_id}
+              toggleDeletingComment={this.toggleDeletingComment}
+            />
           );
         })}
         {commentPosting ? <p>Your comment is being posted</p> : null}
@@ -60,25 +59,13 @@ class ArticleComments extends Component {
     });
   };
 
-  // editComments = (action, username, body) => {
-  //   this.setState((currentState) => {
-  //     if (action === "add") {
-  //       console.log(currentState.comments);
-  //       return {
-  //         comments: currentState.comments.push({
-  //           author: username,
-  //           body: body,
-  //           votes: 0,
-  //         }),
-  //       };
-  //     } else if (action === "delete") {
-  //       console.log(currentState);
-  //       return {
-  //         comments: currentState.comments.pop(),
-  //       };
-  //     }
-  //   });
-  // };
+  toggleDeletingComment = () => {
+    this.setState((currentState) => {
+      return {
+        deletingComment: !currentState.deletingComment,
+      };
+    });
+  };
 
   fetchCommentsByArticleId = () => {
     api.getCommentsByArticleId(this.props.article_id).then((comments) => {
