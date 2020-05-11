@@ -26,6 +26,17 @@
   border: 2px solid black;
 }
 
+.user_item {
+  background-color: lightcoral;
+  border: 2px solid black;
+  margin-bottom: 5px;
+  width: 90%;
+  margin-left: 5%;
+  display: grid;
+  grid-column-end: 3;
+  grid-row-end: 1;
+}
+
 .user_avatar {
   width: 60%;
   justify-content: right;

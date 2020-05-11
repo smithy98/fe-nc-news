@@ -10,7 +10,7 @@ const HomeMain = () => {
       ></img>
       <p>
         Welcome to NC news. Proudly the most biased, non-licensed news
-        corporation; funded by a hostile government. Not really. Well Maybe
+        corporation; funded by a hostile government.
       </p>
     </main>
   );

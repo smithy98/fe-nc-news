@@ -18,11 +18,11 @@ class UsersMain extends Component {
     api
       .getUsers()
       .then((users) => {
-        console.log("then");
+        // console.log("then");
         this.setState({ users, isLoading: false });
       })
       .catch((err) => {
-        console.dir(err.response.data);
+        // console.dir(err.response.data);
         this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
@@ -36,9 +36,9 @@ class UsersMain extends Component {
         <h2>Users</h2>
         {users.map(({ username, avatar_url, name }) => {
           return (
-            <section className="list_item" key={username}>
-              Name: {name} <br />
-              Username: {username} <br />
+            <section className="user_item" key={username}>
+              <p className="text">Name: {name}</p>
+              <p className="text">Username: {username}</p>
               <img
                 src={avatar_url}
                 alt="User Avatar"
