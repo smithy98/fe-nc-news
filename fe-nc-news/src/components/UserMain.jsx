@@ -18,11 +18,9 @@ class UsersMain extends Component {
     api
       .getUsers()
       .then((users) => {
-        // console.log("then");
         this.setState({ users, isLoading: false });
       })
       .catch((err) => {
-        // console.dir(err.response.data);
         this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
