@@ -16,7 +16,7 @@ export const getTopics = () => {
     });
 };
 
-export const getArticles = ({ topic, sortBy }) => {
+export const getArticles = (sortBy, topic) => {
   return axios
     .get("https://nc-news-backend-dan.herokuapp.com/api/articles", {
       params: {

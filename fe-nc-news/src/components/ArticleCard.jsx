@@ -13,7 +13,7 @@ const ArticleCard = (props) => {
   } = props.article;
   return (
     <Link to={`${article_id}`}>
-      <section className="list_item">
+      <section className="article_card">
         <p>Title: {title}</p>
         <p>Author: {author}</p>
         <p>Topic: {topic}</p>

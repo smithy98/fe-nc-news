@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "@reach/router";
 import * as api from "../utils/api";
 import Loading from "./Loading";
 
@@ -21,6 +21,7 @@ class TopicMain extends Component {
 
   render() {
     const { topics, isLoading } = this.state;
+    const { updateTopic } = this.props;
     if (isLoading) return <Loading />;
 
     return (
@@ -28,10 +29,12 @@ class TopicMain extends Component {
         <h2>Topics</h2>
         {topics.map(({ slug, description }) => {
           return (
-            <section className="list_item" key={slug}>
-              <p>Topic: {slug}</p>
-              <p>Description: {description}</p>
-            </section>
+            <Link to="/articles" key={slug} onClick={() => updateTopic(slug)}>
+              <section className="topic_card">
+                <p>Topic: {slug}</p>
+                <p>Description: {description}</p>
+              </section>
+            </Link>
           );
         })}
       </section>

@@ -6,7 +6,6 @@ import ArticleCard from "./ArticleCard";
 class ArticlesMain extends Component {
   state = {
     articles: [],
-    topic: undefined,
     sortBy: undefined,
     isLoading: true,
   };
@@ -17,7 +16,7 @@ class ArticlesMain extends Component {
 
   componentDidUpdate(prevprops, prevstate) {
     if (
-      prevstate.topic !== this.state.topic ||
+      prevprops.topic !== this.props.topic ||
       prevstate.sortBy !== this.state.sortBy
     ) {
       this.fetchArticles();
@@ -25,7 +24,10 @@ class ArticlesMain extends Component {
   }
 
   render() {
-    const { articles, topic, sortBy, isLoading } = this.state;
+    const { articles, sortBy, isLoading } = this.state;
+    const { topic } = this.props;
+
+    console.log(topic);
     if (isLoading) return <Loading />;
 
     return (
@@ -37,7 +39,7 @@ class ArticlesMain extends Component {
             <select
               id="article_topic_dropbox"
               value={topic}
-              onChange={this.handleTopics}
+              onChange={this.handleTopic}
             >
               <option value="">All</option>
               <option value="coding">Coding</option>
@@ -67,17 +69,19 @@ class ArticlesMain extends Component {
   }
 
   fetchArticles = () => {
-    api.getArticles(this.state).then((articles) => {
+    const { sortBy } = this.state;
+    const { topic } = this.props;
+    api.getArticles(sortBy, topic).then((articles) => {
       this.setState({ articles, isLoading: false });
     });
   };
 
-  handleTopics = (event) => {
+  handleTopic = (event) => {
     let topic = event.target.value;
     if (topic.length === 0) {
       topic = undefined;
     }
-    this.setState({ topic: topic });
+    this.props.updateTopic(topic);
   };
 
   handleSortBy = (event) => {

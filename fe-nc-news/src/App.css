@@ -26,6 +26,20 @@
   border: 2px solid black;
 }
 
+.article_card {
+  margin-bottom: 10px;
+  border: 2px solid black;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.topic_card {
+  margin-bottom: 10px;
+  border: 2px solid black;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
 .user_item {
   background-color: lightcoral;
   border: 2px solid black;

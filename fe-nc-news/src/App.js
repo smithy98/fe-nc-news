@@ -14,19 +14,30 @@ import ErrorDisplayer from "./components/ErrorDisplayer";
 class App extends React.Component {
   state = {
     user: "tickle122",
+    topic: undefined,
   };
 
+  // componentDidUpdate(prevProps, prevState){
+  //   if(prevProps.topic !== this.state.topic ) {
+
+  //   }
+  // }
+
   render() {
-    const { user } = this.state;
+    const { user, topic } = this.state;
     return (
       <div className="App">
         <Header />
         <NavBar />
         <Router>
           <HomeMain path="/" />
-          <TopicMain path="/topics" />
+          <TopicMain path="/topics" updateTopic={this.updateTopic} />
           <UserMain path="/users" updateUser={this.updateUser} />
-          <ArticleMain path="/articles" />
+          <ArticleMain
+            path="/articles"
+            topic={topic}
+            updateTopic={this.updateTopic}
+          />
           <ArticleIndividual path="/articles/:article_id" user={user} />
           <ErrorDisplayer default />
         </Router>
@@ -34,9 +45,17 @@ class App extends React.Component {
       </div>
     );
   }
+
   updateUser = (user) => {
     this.setState({
-      user: user,
+      user,
+    });
+  };
+
+  updateTopic = (topic) => {
+    console.log("updateTopic", topic);
+    this.setState({
+      topic,
     });
   };
 }
