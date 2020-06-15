@@ -17,12 +17,6 @@ class App extends React.Component {
     topic: undefined,
   };
 
-  // componentDidUpdate(prevProps, prevState){
-  //   if(prevProps.topic !== this.state.topic ) {
-
-  //   }
-  // }
-
   render() {
     const { user, topic } = this.state;
     return (

@@ -6,8 +6,6 @@
   display: grid;
   grid-template-rows: auto auto auto;
   border: 2px solid black;
-  /* align-content: right;
-  justify-content: right; */
 }
 
 #navbar {
@@ -41,7 +39,6 @@
 }
 
 .user_item {
-  background-color: lightcoral;
   border: 2px solid black;
   margin-bottom: 5px;
   width: 90%;
@@ -71,4 +68,9 @@
   width: 90%;
   margin-right: 5px;
   justify-self: right;
+}
+
+#home_image {
+  width: 90%;
+  margin-left: 5%;
 }

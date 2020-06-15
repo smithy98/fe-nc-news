@@ -14,6 +14,10 @@ class ArticlesMain extends Component {
     this.fetchArticles();
   }
 
+  componentWillUnmount() {
+    this.props.updateTopic(undefined);
+  }
+
   componentDidUpdate(prevprops, prevstate) {
     if (
       prevprops.topic !== this.props.topic ||
@@ -27,7 +31,6 @@ class ArticlesMain extends Component {
     const { articles, sortBy, isLoading } = this.state;
     const { topic } = this.props;
 
-    console.log(topic);
     if (isLoading) return <Loading />;
 
     return (
@@ -50,7 +53,7 @@ class ArticlesMain extends Component {
           <label>
             Sort By:
             <select
-              id="article_topic_dropbox"
+              id="article_sortBy_dropbox"
               value={sortBy}
               onChange={this.handleSortBy}
             >
