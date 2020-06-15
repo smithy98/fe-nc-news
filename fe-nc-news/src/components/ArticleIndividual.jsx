@@ -20,8 +20,6 @@ class ArticleIndividual extends Component {
     const { article, isLoading, err } = this.state;
     const { user } = this.props;
 
-    console.log(err);
-
     if (isLoading) return <Loading />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
@@ -50,7 +48,6 @@ class ArticleIndividual extends Component {
         this.setState({ article: article, isLoading: false });
       })
       .catch((err) => {
-        console.log("in error catch");
         this.setState({
           err: err.response.data.msg,
           isLoading: false,

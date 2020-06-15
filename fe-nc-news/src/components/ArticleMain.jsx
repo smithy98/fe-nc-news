@@ -20,7 +20,6 @@ class ArticlesMain extends Component {
       prevstate.topic !== this.state.topic ||
       prevstate.sortBy !== this.state.sortBy
     ) {
-      console.log("updating");
       this.fetchArticles();
     }
   }
